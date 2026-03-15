@@ -1,12 +1,14 @@
 import os
+import sys
 from nanovllm import LLM, SamplingParams
 from transformers import AutoTokenizer
 
 
 def main():
-    path = os.path.expanduser("~/huggingface/Qwen3-0.6B/")
+    sys.stdout.reconfigure(encoding='utf-8')
+    path = os.path.expanduser("downloads/Qwen3-0.6B/")
     tokenizer = AutoTokenizer.from_pretrained(path)
-    llm = LLM(path, enforce_eager=True, tensor_parallel_size=1)
+    llm = LLM(path, enforce_eager=True)
 
     sampling_params = SamplingParams(temperature=0.6, max_tokens=256)
     prompts = [
